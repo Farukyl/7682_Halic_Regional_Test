@@ -15,6 +15,7 @@ import frc.robot.commands.ClimbCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.GripperCommand;
 import frc.robot.commands.TurretCommand;
+import frc.robot.commands.TurretPIDCommand;
 import frc.robot.subsystems.ArmTurnSubsytem;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
@@ -61,6 +62,7 @@ public class RobotContainer {
     new JoystickButton(stick, 2).whileTrue(new RepeatCommand(new ClimbCommand(climbSubsystem, -1)));
     new JoystickButton(stick, 3).whileTrue(new RepeatCommand(new ArmTurnCommand(armTurnSubsytem, 1)));
     new JoystickButton(stick, 4).whileTrue(new RepeatCommand(new ArmTurnCommand(armTurnSubsytem, -1)));
+    new JoystickButton(stick, 5).whileTrue(new RepeatCommand(new TurretPIDCommand(turretSubsystem, 90))); 
 
 
   }
