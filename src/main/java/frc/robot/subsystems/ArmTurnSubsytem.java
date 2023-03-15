@@ -8,6 +8,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -18,8 +19,28 @@ public class ArmTurnSubsytem extends SubsystemBase {
 
   MotorControllerGroup armControllerGroup = new MotorControllerGroup(armSparkMax1, armSparkMax2);
 
+  PIDController armPidController = new PIDController(0.1, 0, 0);
+
+  double degreeSetPoint;
+
   /** Creates a new ArmTurnSubsytem. */
   public ArmTurnSubsytem() {}
+
+  public void armEncoderReset(){
+    armSparkMax1.getEncoder().setPosition(0);
+  }
+
+  public double armEncoderDegree(){
+    double armDegree = armSparkMax1.getEncoder().getPosition()*180;
+    return armDegree;
+    
+  }
+
+  public void armPID(double degreeSetPoint){
+    double armPidControl = armPidController.calculate(armEncoderDegree(), degreeSetPoint);
+    armControllerGroup.set(armPidControl);
+
+  }
 
   public void ArmTurnIn(double speed) {
     armControllerGroup.set(speed);
