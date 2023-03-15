@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class TurretSubsystem extends SubsystemBase {
@@ -23,14 +24,12 @@ public class TurretSubsystem extends SubsystemBase {
   double degreeSetPoint;
 
   
-
-
-
-
-
-  
   /** Creates a new TurretSubsystem. */
   public TurretSubsystem() {
+  }
+
+  public void turretEncoderReset(){
+    turret.getEncoder().setPosition(0);
   }
 
   public double turretEncoderDegree() { 
@@ -41,6 +40,7 @@ public class TurretSubsystem extends SubsystemBase {
   public void turretPID(double degreeSetPoint) {
     double turretPIDcontrol = turretPidController.calculate(turretEncoderDegree(), degreeSetPoint);
     turreControllerGroup.set(turretPIDcontrol);
+    SmartDashboard.putNumber("turretEncoderPosition", turretEncoderDegree());
   
   }
 
