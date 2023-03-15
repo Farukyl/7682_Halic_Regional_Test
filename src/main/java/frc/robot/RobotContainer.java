@@ -10,12 +10,14 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RepeatCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.PIDCommands.ArmTurnPIDCommand;
+import frc.robot.PIDCommands.ClimbPIDCommand;
+import frc.robot.PIDCommands.TurretPIDCommand;
 import frc.robot.commands.ArmTurnCommand;
 import frc.robot.commands.ClimbCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.GripperCommand;
 import frc.robot.commands.TurretCommand;
-import frc.robot.commands.TurretPIDCommand;
 import frc.robot.subsystems.ArmTurnSubsytem;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
@@ -62,7 +64,11 @@ public class RobotContainer {
     new JoystickButton(stick, 2).whileTrue(new RepeatCommand(new ClimbCommand(climbSubsystem, -1)));
     new JoystickButton(stick, 3).whileTrue(new RepeatCommand(new ArmTurnCommand(armTurnSubsytem, 1)));
     new JoystickButton(stick, 4).whileTrue(new RepeatCommand(new ArmTurnCommand(armTurnSubsytem, -1)));
-    new JoystickButton(stick, 5).whileTrue(new RepeatCommand(new TurretPIDCommand(turretSubsystem, 90))); 
+    new JoystickButton(stick, 5).whileTrue(new RepeatCommand(new TurretPIDCommand(turretSubsystem, 180))); 
+    new JoystickButton(stick, 6).whileTrue(new RepeatCommand(new ArmTurnPIDCommand(armTurnSubsytem, 90))); 
+    new JoystickButton(stick, 7).whileTrue(new RepeatCommand(new ClimbPIDCommand(climbSubsystem, 70)));
+
+
 
 
   }
